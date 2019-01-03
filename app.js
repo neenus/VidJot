@@ -116,6 +116,14 @@ app.put('/ideas/:id', (req, res) => {
   });
 });
 
+// delete idea
+app.delete('/ideas/:id', (req, res) => {
+  Idea.deleteOne({_id: req.params.id})
+    .then(() => {
+      res.redirect('/ideas');
+    });
+});
+
 const port = 5000;
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server started and listening on port ${port}`);
