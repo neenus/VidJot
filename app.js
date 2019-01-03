@@ -59,10 +59,17 @@ app.post('/ideas', (req, res) => {
       title: req.body.title,
       details: req.body.details
     });
-  } else (
-    console.log(req.body),
-    res.send('passed')
-  );
+  } else {
+    const newUser = {
+      title: req.body.title,
+      details: req.body.details
+    };
+    new Idea(newUser)
+      .save()
+      .then(idea => {
+        res.redirect('/ideas');
+      });
+  }
 });
 
 
